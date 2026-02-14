@@ -543,6 +543,15 @@ def get_selected_obj() -> Optional[CityObject]:
 
 st.set_page_config(page_title="CityTwin — Өскемен", layout="wide")
 
+# --- Бургер-меню (встроенный сайдбар Streamlit) ---
+with st.sidebar:
+    st.markdown("## ☰ Меню")
+    st.link_button("🌐 Telegram-Bot ", "t.me/twincitybot")  # <-- вставь свою ссылку
+
+    st.markdown("---")
+    st.caption("CityTwin • навигация")
+
+
 inject_css()
 
 init_state()
