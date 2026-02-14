@@ -543,6 +543,43 @@ def get_selected_obj() -> Optional[CityObject]:
 
 st.set_page_config(page_title="CityTwin — Өскемен", layout="wide")
 
+import base64
+
+# --- Фон из assets/loading.png ---
+def set_background():
+    try:
+        with open("assets/loading.png", "rb") as img_file:
+            encoded = base64.b64encode(img_file.read()).decode()
+    except Exception as e:
+        st.error("Не удалось загрузить фон loading.png")
+        return
+
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/png;base64,{encoded}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+
+        /* Светлый слой сверху для читаемости текста */
+        .stApp::before {{
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.85);
+            z-index: -1;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+# Вызов функции
+set_background()
+
 # --- Бургер-меню (встроенный сайдбар Streamlit) ---
 with st.sidebar:
     st.markdown("## ☰ Меню")
